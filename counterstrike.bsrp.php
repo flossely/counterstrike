@@ -43,7 +43,7 @@ if (!file_exists($add.'/coord')) {
     chmod($add.'/coord', 0777);
 }
 if (!file_exists($add.'/rating')) {
-    file_put_contents($add.'/rating', 50);
+    file_put_contents($add.'/rating', 5);
     chmod($add.'/rating', 0777);
 }
 if (!file_exists($add.'/mode')) {
