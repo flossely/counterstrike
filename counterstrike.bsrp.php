@@ -19,8 +19,22 @@ function verbMode($m) {
 
 // GETTING DATA FROM HTTP REQUEST
 $add = $_REQUEST['id'];
-$team = $_REQUEST['team'];
+$dataString = $_REQUEST['data'];
 
+// PARSING ADDITIONAL DATA
+$dataParse = explode('|[1]|', $dataString);
+$metadata = [];
+foreach ($dataParse as $key=>$value) {
+    $dataExp = explode('|[>]|', $value);
+    $dataProp = $dataExp[0];
+    $dataValue = $dataExp[1];
+    $metadata[$dataProp] = $dataValue;
+}
+
+// GETTING VALUES FROM METADATA ARRAY
+$team = $metadata['team'];
+
+// PREPARING DATA TO CREATE NEW OBJECT
 if ($team == 'ct') {
     $addMode = 1;
     $addWeapon = 'ar15';
