@@ -1,10 +1,24 @@
 <?php
 
-// GETTING CURRENT YEAR FROM FILE
+if (file_exists('paradigm')) {
+    $paradigm = file_get_contents('paradigm');
+} else {
+    $paradigm = 'default';
+}
+$paradigmFile = file_get_contents($paradigm.'.par');
+$paradigmArr = explode('|[1]|', $paradigmFile);
+$paradigmData = [];
+foreach ($paradigmArr as $key=>$value) {
+    $paradigmExp = explode('|[>]|', $value);
+    $paradigmElemProp = $paradigmExp[0];
+    $paradigmElemVal = $paradigmExp[1];
+    $paradigmData[$paradigmElemProp] = $paradigmElemVal;
+}
+
 if (file_exists('year')) {
     $today = file_get_contents('year');
 } else {
-    $today = -2000;
+    $today = $paradigmData['starting_year'];
 }
 
 function verbMode($m) {
@@ -17,11 +31,9 @@ function verbMode($m) {
     }
 }
 
-// GETTING DATA FROM HTTP REQUEST
 $add = $_REQUEST['id'];
 $dataString = $_REQUEST['data'];
 
-// PARSING ADDITIONAL DATA
 $dataParse = explode('|[1]|', $dataString);
 $metadata = [];
 foreach ($dataParse as $key=>$value) {
@@ -31,10 +43,8 @@ foreach ($dataParse as $key=>$value) {
     $metadata[$dataProp] = $dataValue;
 }
 
-// GETTING VALUES FROM METADATA ARRAY
 $team = $metadata['team'];
 
-// PREPARING DATA TO CREATE NEW OBJECT
 if ($team == 'ct') {
     $addMode = 1;
     $addWeapon = 'ar15';
@@ -45,19 +55,17 @@ if ($team == 'ct') {
     $addMode = 0;
 }
 
-// CREATE OBJECT DIRECTORY IF NOT EXISTING
 if (!file_exists($add)) {
     mkdir($add);
     chmod($add, 0777);
 }
 
-// THOSE FILES ONCE CREATED IN TARGET DIRECTORY WILL NOT BE OVERRIDDEN
 if (!file_exists($add.'/coord')) {
-    file_put_contents($add.'/coord', '0;0;0');
+    file_put_contents($add.'/coord', $paradigmData['starting_coord']);
     chmod($add.'/coord', 0777);
 }
 if (!file_exists($add.'/rating')) {
-    file_put_contents($add.'/rating', 5);
+    file_put_contents($add.'/rating', $paradigmData['starting_rating']);
     chmod($add.'/rating', 0777);
 }
 if (!file_exists($add.'/mode')) {
@@ -65,11 +73,11 @@ if (!file_exists($add.'/mode')) {
     chmod($add.'/mode', 0777);
 }
 if (!file_exists($add.'/score')) {
-    file_put_contents($add.'/score', 0);
+    file_put_contents($add.'/score', $paradigmData['starting_score']);
     chmod($add.'/score', 0777);
 }
 if (!file_exists($add.'/money')) {
-    file_put_contents($add.'/money', 1000);
+    file_put_contents($add.'/money', $paradigmData['starting_money']);
     chmod($add.'/money', 0777);
 }
 if (!file_exists($add.'/born')) {
@@ -77,7 +85,6 @@ if (!file_exists($add.'/born')) {
     chmod($add.'/born', 0777);
 }
 
-// GETTING WEAPONS FOR AN OBJECT
 if ($addMode != 0) {
     if (file_exists('weapons')) {
         chmod('weapons', 0777);
@@ -94,7 +101,6 @@ if ($addMode != 0) {
     }
 }
 
-// GETTING ICON FOR AN OBJECT
 if (file_exists('logos')) {
     chmod('logos', 0777);
     rename('logos', 'logos.d');
