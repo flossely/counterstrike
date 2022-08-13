@@ -24,11 +24,13 @@ if (file_exists('year')) {
 function verbMode($m) {
     if ($m > 0) {
         $result = 'right';
-    } elseif ($m < 0)
+    } elseif ($m < 0) {
         $result = 'left';
     } else {
         $result = 'center';
     }
+    
+    return $result;
 }
 
 $add = $_REQUEST['id'];
