@@ -1,19 +1,38 @@
 <?php
 
+function getParadigmInfo($id): array {
+    $str = file_get_contents($id.'.par');
+    $arr = explode('|[1]|', $str);
+    $obj = [];
+    foreach ($arr as $line) {
+        $div = explode('|[>]|', $line);
+        $prop = $div[0];
+        $val = $div[1];
+        $obj[$prop] = $val;
+    }
+    
+    return $obj;
+}
+
+function parseGetData($data): array {
+    $parse = explode('|[1]|', $data);
+    $arr = [];
+    foreach ($parse as $load) {
+        $line = explode('|[>]|', $load);
+        $prop = $line[0];
+        $value = $line[1];
+        $arr[$prop] = $value;
+    }
+    
+    return $arr;
+}
+
 if (file_exists('paradigm')) {
     $paradigm = file_get_contents('paradigm');
 } else {
     $paradigm = 'default';
 }
-$paradigmFile = file_get_contents($paradigm.'.par');
-$paradigmArr = explode('|[1]|', $paradigmFile);
-$paradigmData = [];
-foreach ($paradigmArr as $key=>$value) {
-    $paradigmExp = explode('|[>]|', $value);
-    $paradigmElemProp = $paradigmExp[0];
-    $paradigmElemVal = $paradigmExp[1];
-    $paradigmData[$paradigmElemProp] = $paradigmElemVal;
-}
+$paradigmData = getParadigmInfo($paradigm);
 
 if (file_exists('year')) {
     $today = file_get_contents('year');
@@ -36,15 +55,7 @@ function verbMode($m) {
 $add = $_REQUEST['id'];
 $dataString = $_REQUEST['data'];
 
-$dataParse = explode('|[1]|', $dataString);
-$metadata = [];
-foreach ($dataParse as $key=>$value) {
-    $dataExp = explode('|[>]|', $value);
-    $dataProp = $dataExp[0];
-    $dataValue = $dataExp[1];
-    $metadata[$dataProp] = $dataValue;
-}
-
+$metadata = parseGetData($dataString);
 $team = $metadata['team'];
 
 if ($team == 'ct') {
