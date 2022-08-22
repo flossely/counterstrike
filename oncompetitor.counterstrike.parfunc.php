@@ -8,14 +8,14 @@ if ($subAction == "walk") {
     if ($subDirect == 0) {
         $subX += $subMove;
         $subScore += 1;
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] " .
-            $spacedictus[$lingua]["right"] .
+            $spacedictus[$proLingo]["right"] .
             " {" .
             $subX .
             ";" .
@@ -26,14 +26,14 @@ if ($subAction == "walk") {
     } elseif ($subDirect == 1) {
         $subX -= $subMove;
         $subScore += 1;
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] " .
-            $spacedictus[$lingua]["left"] .
+            $spacedictus[$proLingo]["left"] .
             " {" .
             $subX .
             ";" .
@@ -44,14 +44,14 @@ if ($subAction == "walk") {
     } elseif ($subDirect == 2) {
         $subY += $subMove;
         $subScore += 1;
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] " .
-            $spacedictus[$lingua]["forward"] .
+            $spacedictus[$proLingo]["forward"] .
             " {" .
             $subX .
             ";" .
@@ -62,14 +62,14 @@ if ($subAction == "walk") {
     } elseif ($subDirect == 3) {
         $subY -= $subMove;
         $subScore += 1;
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] " .
-            $spacedictus[$lingua]["back"] .
+            $spacedictus[$proLingo]["back"] .
             " {" .
             $subX .
             ";" .
@@ -82,7 +82,7 @@ if ($subAction == "walk") {
     $objRating -= $subForce + $objShield;
     $subRating += $subForce - $objShield;
     $subScore += 5;
-    echo turnFormat($paradigm, $today) .
+    echo $turnNum .
         " : " .
         $subModeSign .
         $sub .
@@ -102,7 +102,7 @@ if ($subAction == "walk") {
     $subRating -= $objForce + $subShield;
     $objRating += $objForce - $subShield;
     $objScore += 5;
-    echo turnFormat($paradigm, $today) .
+    echo $turnNum .
         " : " .
         $objModeSign .
         $obj .
@@ -130,62 +130,62 @@ if ($subAction == "walk") {
                     $searchProFor . "/" . $randomObjectPro,
                     $searchSubFor . "/" . $randomObjectPro
                 );
-                echo turnFormat($paradigm, $today) .
+                echo $turnNum .
                     " : " .
                     $subModeSign .
                     $sub .
                     "[" .
                     $subRating .
                     "] " .
-                    $spacedictus[$lingua]["bought"] .
+                    $spacedictus[$proLingo]["bought"] .
                     " " .
                     $proWeaponName .
                     " " .
-                    $spacedictus[$lingua]["for"] .
+                    $spacedictus[$proLingo]["for"] .
                     " " .
                     $proWeaponPrice .
                     " " .
-                    $spacedictus[$lingua]["cur"] .
+                    $spacedictus[$proLingo]["cur"] .
                     " " .
-                    $spacedictus[$lingua]["from"] .
+                    $spacedictus[$proLingo]["from"] .
                     " /system/<br>";
             } else {
-                echo turnFormat($paradigm, $today) .
+                echo $turnNum .
                     " : /system/ " .
-                    $spacedictus[$lingua]["to"] .
+                    $spacedictus[$proLingo]["to"] .
                     " " .
                     $subModeSign .
                     $sub .
                     "[" .
                     $subRating .
                     "] - " .
-                    $spacedictus[$lingua]["insufficient"] .
+                    $spacedictus[$proLingo]["insufficient"] .
                     "<br>";
             }
         } else {
-            echo turnFormat($paradigm, $today) .
+            echo $turnNum .
                 " : /system/ " .
-                $spacedictus[$lingua]["to"] .
+                $spacedictus[$proLingo]["to"] .
                 " " .
                 $subModeSign .
                 $sub .
                 "[" .
                 $subRating .
                 "] - " .
-                $spacedictus[$lingua]["nothing"] .
+                $spacedictus[$proLingo]["nothing"] .
                 "<br>";
         }
     } else {
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : /system/ " .
-            $spacedictus[$lingua]["to"] .
+            $spacedictus[$proLingo]["to"] .
             " " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] - " .
-            $spacedictus[$lingua]["already"] .
+            $spacedictus[$proLingo]["already"] .
             "<br>";
     }
 } elseif ($subAction == "withdraw") {
@@ -200,62 +200,62 @@ if ($subAction == "walk") {
                     $searchSubFor . "/" . $randomObjectSub,
                     $searchProFor . "/" . $randomObjectSub
                 );
-                echo turnFormat($paradigm, $today) .
+                echo $turnNum .
                     " : " .
                     $subModeSign .
                     $sub .
                     "[" .
                     $subRating .
                     "] " .
-                    $spacedictus[$lingua]["sold"] .
+                    $spacedictus[$proLingo]["sold"] .
                     " " .
                     $subWeaponName .
                     " " .
-                    $spacedictus[$lingua]["for"] .
+                    $spacedictus[$proLingo]["for"] .
                     " " .
                     $subWeaponPrice .
                     " " .
-                    $spacedictus[$lingua]["cur"] .
+                    $spacedictus[$proLingo]["cur"] .
                     " " .
-                    $spacedictus[$lingua]["to"] .
+                    $spacedictus[$proLingo]["to"] .
                     " /system/<br>";
             } else {
-                echo turnFormat($paradigm, $today) .
+                echo $turnNum .
                     " : " .
                     $subModeSign .
                     $sub .
                     "[" .
                     $subRating .
                     "] " .
-                    $spacedictus[$lingua]["to"] .
+                    $spacedictus[$proLingo]["to"] .
                     " /system/ - " .
-                    $spacedictus[$lingua]["insufficient"] .
+                    $spacedictus[$proLingo]["insufficient"] .
                     "<br>";
             }
         } else {
-            echo turnFormat($paradigm, $today) .
+            echo $turnNum .
                 " : " .
                 $subModeSign .
                 $sub .
                 "[" .
                 $subRating .
                 "] " .
-                $spacedictus[$lingua]["to"] .
+                $spacedictus[$proLingo]["to"] .
                 " /system/ - " .
-                $spacedictus[$lingua]["nothing"] .
+                $spacedictus[$proLingo]["nothing"] .
                 "<br>";
         }
     } else {
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] " .
-            $spacedictus[$lingua]["to"] .
+            $spacedictus[$proLingo]["to"] .
             " /system/ - " .
-            $spacedictus[$lingua]["already"] .
+            $spacedictus[$proLingo]["already"] .
             "<br>";
     }
 }

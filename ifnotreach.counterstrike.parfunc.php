@@ -8,14 +8,14 @@ if ($subAction == "walk") {
     if ($subDirect == 0) {
         $subX += $subMove;
         $subScore += 1;
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] " .
-            $spacedictus[$lingua]["right"] .
+            $spacedictus[$proLingo]["right"] .
             " {" .
             $subX .
             ";" .
@@ -26,14 +26,14 @@ if ($subAction == "walk") {
     } elseif ($subDirect == 1) {
         $subX -= $subMove;
         $subScore += 1;
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] " .
-            $spacedictus[$lingua]["left"] .
+            $spacedictus[$proLingo]["left"] .
             " {" .
             $subX .
             ";" .
@@ -44,14 +44,14 @@ if ($subAction == "walk") {
     } elseif ($subDirect == 2) {
         $subY += $subMove;
         $subScore += 1;
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] " .
-            $spacedictus[$lingua]["forward"] .
+            $spacedictus[$proLingo]["forward"] .
             " {" .
             $subX .
             ";" .
@@ -62,14 +62,14 @@ if ($subAction == "walk") {
     } elseif ($subDirect == 3) {
         $subY -= $subMove;
         $subScore += 1;
-        echo turnFormat($paradigm, $today) .
+        echo $turnNum .
             " : " .
             $subModeSign .
             $sub .
             "[" .
             $subRating .
             "] " .
-            $spacedictus[$lingua]["back"] .
+            $spacedictus[$proLingo]["back"] .
             " {" .
             $subX .
             ";" .
