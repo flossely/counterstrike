@@ -132,16 +132,16 @@ if ($subAction == "walk") {
         $objZ .
         "}<br>";
 } elseif ($subAction == "vendor") {
-    if (!file_exists($searchSubFor . "/" . $randomObjectPro)) {
+    if (!file_exists("./" . $sub . "/" . $proWeaponObjID . '.' . $proWeaponObjClass . '.obj')) {
         if ($proWeaponPrice > 0) {
             $weaponOfferSum = $proWeaponPrice;
             if ($subMoney >= $weaponOfferSum) {
                 $proMoney += $weaponOfferSum;
                 $subMoney -= $weaponOfferSum;
-                chmod($searchProFor . "/" . $randomObjectPro, 0777);
+                chmod("./" . $proWeaponObjID . '.' . $proWeaponObjClass . '.obj', 0777);
                 rename(
-                    $searchProFor . "/" . $randomObjectPro,
-                    $searchSubFor . "/" . $randomObjectPro
+                    "./" . $proWeaponObjID . '.' . $proWeaponObjClass . '.obj',
+                    "./" . $sub . "/" . $proWeaponObjID . '.' . $proWeaponObjClass . '.obj'
                 );
                 echo $turnNum .
                     " : " .
@@ -202,16 +202,16 @@ if ($subAction == "walk") {
             "<br>";
     }
 } elseif ($subAction == "withdraw") {
-    if (!file_exists($searchProFor . "/" . $randomObjectSub)) {
+    if (!file_exists("./" . $subWeaponObjID . '.' . $subWeaponObjClass . '.obj')) {
         if ($subWeaponPrice > 0) {
             $weaponOfferSum = $subWeaponPrice;
             if ($proMoney >= $weaponOfferSum) {
                 $proMoney -= $weaponOfferSum;
                 $subMoney += $weaponOfferSum;
-                chmod($searchSubFor . "/" . $randomObjectSub, 0777);
+                chmod("./" . $sub  . "/" . $subWeaponObjID . '.' . $subWeaponObjClass . '.obj', 0777);
                 rename(
-                    $searchSubFor . "/" . $randomObjectSub,
-                    $searchProFor . "/" . $randomObjectSub
+                    "./" . $sub  . "/" . $subWeaponObjID . '.' . $subWeaponObjClass . '.obj',
+                    "./" . $subWeaponObjID . '.' . $subWeaponObjClass . '.obj'
                 );
                 echo $turnNum .
                     " : " .
