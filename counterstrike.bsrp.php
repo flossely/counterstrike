@@ -1,44 +1,7 @@
 <?php
 
-function parseArrayFile($name): array {
-    $str = file_get_contents($name);
-    $arr = explode('|[1]|', $str);
-    $obj = [];
-    foreach ($arr as $line) {
-        $div = explode('|[>]|', $line);
-        $prop = $div[0];
-        $val = $div[1];
-        $obj[$prop] = $val;
-    }
-    
-    return $obj;
-}
-
-function parseGetData($data): array {
-    $parse = explode('|[1]|', $data);
-    $arr = [];
-    foreach ($parse as $load) {
-        $line = explode('|[>]|', $load);
-        $prop = $line[0];
-        $value = $line[1];
-        $arr[$prop] = $value;
-    }
-    
-    return $arr;
-}
-
-if (file_exists('paradigm')) {
-    $paradigm = file_get_contents('paradigm');
-} else {
-    $paradigm = 'default';
-}
-$paradigmData = parseArrayFile($paradigm.'.par');
-
-if (file_exists('year')) {
-    $today = file_get_contents('year');
-} else {
-    $today = $paradigmData['default_year'];
-}
+include 'basefunc.php';
+include 'dataload.php';
 
 function verbMode($m) {
     if ($m > 0) {
@@ -97,6 +60,9 @@ if (!file_exists($add.'/born')) {
     file_put_contents($add.'/born', $today);
     chmod($add.'/born', 0777);
 }
+
+file_put_contents($add.'/locale', $lingua);
+chmod($add.'/locale', 0777);
 
 if ($addMode != 0) {
     if (file_exists('weapons')) {
