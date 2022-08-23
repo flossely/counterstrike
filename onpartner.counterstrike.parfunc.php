@@ -3,25 +3,16 @@
 $subActions = ["walk", "heal", "escort", "vendor", "withdraw"];
 $subActionCount = count($subActions);
 $subAction = $subActions[rand(0, $subActionCount - 1)];
+
 if ($subAction == "walk") {
-    echo movement($turnNum, $subNotation, $subX, $subY, $subZ, 3, $subMove);
+    $msgBox = movement($turnNum, $subNotation, $subX, $subY, $subZ, 3, $subMove);
+    $subX = $msgBox['x'];
+    $subY = $msgBox['y'];
+    $subZ = $msgBox['z'];
 } elseif ($subAction == "heal") {
     $objRating += $subHeal;
     $subScore += 5;
-    echo $turnNum .
-        " : " .
-        $subModeSign .
-        $sub .
-        "[" .
-        $subRating .
-        "] " .
-        $spacedictus[$proLingo]["heal"] .
-        " " .
-        $objModeSign .
-        $obj .
-        "[" .
-        $objRating .
-        "]<br>";
+    echo $turnNum." : ".$subHalfNotation.' '.$spacedictus[$proLingo]["heal"].' ('.$subHeal.') '.$objHalfNotation."<br>";
 } elseif ($subAction == "escort") {
     $subDirect = rand(0, 3);
     if ($subDirect == 0) {
@@ -38,26 +29,7 @@ if ($subAction == "walk") {
         $objY -= $subMove;
     }
     $subScore += 5;
-    echo $turnNum .
-        " : " .
-        $subModeSign .
-        $sub .
-        "[" .
-        $subRating .
-        "] " .
-        $spacedictus[$proLingo]["escort"] .
-        " " .
-        $objModeSign .
-        $obj .
-        "[" .
-        $objRating .
-        "] {" .
-        $objX .
-        ";" .
-        $objY .
-        ";" .
-        $objZ .
-        "}<br>";
+    echo $turnNum." : ".$subFullNotation." ".$spacedictus[$proLingo]["escort"]." ".$objFullNotation."<br>";
 } elseif ($subAction == "vendor") {
     $msgBox = initExchange($thisParadigm, $yearToday, '.', $sub, $proMoney, $subMoney, ratioCalc($proEconVal, $subEconVal), $proUseWeapon);
     $proMoney = $msgBox['debit'];
