@@ -46,7 +46,7 @@ if ($subAction == "walk") {
         $subRating .
         "]<br>";
 } elseif ($subAction == "vendor") {
-    echo initExchange($turnNum, $subNotation, '.', $sub, $proMoney, $subMoney, $proUseWeapon);
+    echo initExchange($thisParadigm, $yearToday, '.', $sub, $proMoney, $subMoney, $proUseWeapon);
 } elseif ($subAction == "withdraw") {
-    echo initExchange($turnNum, $subNotation, $sub, '.', $subMoney, $proMoney, $subUseWeapon);
+    echo initExchange($thisParadigm, $yearToday, $sub, '.', $subMoney, $proMoney, $subUseWeapon);
 }
