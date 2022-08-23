@@ -8,140 +8,16 @@ if ($subAction == "close") {
     $subY = $objY;
     $subZ = $objZ;
     $subScore += 10;
-    echo $turnNum .
-        " : " .
-        $subModeSign .
-        $sub .
-        "[" .
-        $subRating .
-        "] " .
-        $spacedictus[$proLingo]["tract"] .
-        " " .
-        $objModeSign .
-        $obj .
-        "[" .
-        $objRating .
-        "] {" .
-        $subX .
-        ";" .
-        $subY .
-        ";" .
-        $subZ .
-        "}<br>";
+    echo $turnNum . " : " . $subFullNotation . ' '. $spacedictus[$proLingo]["tract"] . ' ' . $objFullNotation . "<br>";
 } elseif ($subAction == "take") {
-    $subDirect = rand(0, 5);
-    if ($subDirect == 0) {
-        $subX += $subMove;
-        $subScore += 1;
-        echo $turnNum .
-            " : " .
-            $subModeSign .
-            $sub .
-            "[" .
-            $subRating .
-            "] " .
-            $spacedictus[$proLingo]["right"] .
-            " {" .
-            $subX .
-            ";" .
-            $subY .
-            ";" .
-            $subZ .
-            "}<br>";
-    } elseif ($subDirect == 1) {
-        $subX -= $subMove;
-        $subScore += 1;
-        echo $turnNum .
-            " : " .
-            $subModeSign .
-            $sub .
-            "[" .
-            $subRating .
-            "] " .
-            $spacedictus[$proLingo]["left"] .
-            " {" .
-            $subX .
-            ";" .
-            $subY .
-            ";" .
-            $subZ .
-            "}<br>";
-    } elseif ($subDirect == 2) {
-        $subY += $subMove;
-        $subScore += 1;
-        echo $turnNum .
-            " : " .
-            $subModeSign .
-            $sub .
-            "[" .
-            $subRating .
-            "] " .
-            $spacedictus[$proLingo]["forward"] .
-            " {" .
-            $subX .
-            ";" .
-            $subY .
-            ";" .
-            $subZ .
-            "}<br>";
-    } elseif ($subDirect == 3) {
-        $subY -= $subMove;
-        $subScore += 1;
-        echo $turnNum .
-            " : " .
-            $subModeSign .
-            $sub .
-            "[" .
-            $subRating .
-            "] " .
-            $spacedictus[$proLingo]["back"] .
-            " {" .
-            $subX .
-            ";" .
-            $subY .
-            ";" .
-            $subZ .
-            "}<br>";
-    } elseif ($subDirect == 4) {
-        $subZ += $subMove;
-        $subScore += 1;
-        echo $turnNum .
-            " : " .
-            $subModeSign .
-            $sub .
-            "[" .
-            $subRating .
-            "] " .
-            $spacedictus[$proLingo]["up"] .
-            " {" .
-            $subX .
-            ";" .
-            $subY .
-            ";" .
-            $subZ .
-            "}<br>";
-    } elseif ($subDirect == 5) {
-        $subZ -= $subMove;
-        $subScore += 1;
-        echo $turnNum .
-            " : " .
-            $subModeSign .
-            $sub .
-            "[" .
-            $subRating .
-            "] " .
-            $spacedictus[$proLingo]["down"] .
-            " {" .
-            $subX .
-            ";" .
-            $subY .
-            ";" .
-            $subZ .
-            "}<br>";
-    }
-    $objX = $subX;
-    $objY = $subY;
-    $objZ = $subZ;
+    $msgBox = synchrone($turnNum, $subNotation, $subX, $subY, $subZ, $objNotation, $objX, $objY, $objZ, 3, $subMove);
+    $subX = $msgBox['i']['x'];
+    $subY = $msgBox['i']['y'];
+    $subZ = $msgBox['i']['z'];
+    $objX = $msgBox['j']['x'];
+    $objY = $msgBox['j']['y'];
+    $objZ = $msgBox['j']['z'];
+    $subScore += 5;
 } elseif ($subAction == "vendor") {
     $msgBox = initExchange($thisParadigm, $yearToday, '.', $sub, $proMoney, $subMoney, ratioCalc($proEconVal, $subEconVal), $proUseWeapon);
     $proMoney = $msgBox['debit'];
