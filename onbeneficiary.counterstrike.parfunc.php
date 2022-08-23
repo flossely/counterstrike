@@ -143,7 +143,7 @@ if ($subAction == "close") {
     $objY = $subY;
     $objZ = $subZ;
 } elseif ($subAction == "vendor") {
-    echo initExchange($thisParadigm, $yearToday, '.', $sub, $proMoney, $subMoney, $proUseWeapon);
+    echo initExchange($thisParadigm, $yearToday, '.', $sub, $proMoney, $subMoney, ratioCalc($proEconVal, $subEconVal), $proUseWeapon);
 } elseif ($subAction == "withdraw") {
-    echo initExchange($thisParadigm, $yearToday, $sub, '.', $subMoney, $proMoney, $subUseWeapon);
+    echo initExchange($thisParadigm, $yearToday, $sub, '.', $subMoney, $proMoney, ratioCalc($subEconVal, $proEconVal), $subUseWeapon);
 }
