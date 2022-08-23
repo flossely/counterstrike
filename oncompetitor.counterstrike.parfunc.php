@@ -46,7 +46,11 @@ if ($subAction == "walk") {
         $subRating .
         "]<br>";
 } elseif ($subAction == "vendor") {
-    echo initExchange($thisParadigm, $yearToday, '.', $sub, $proMoney, $subMoney, ratioCalc($proEconVal, $subEconVal), $proUseWeapon);
+    $msgBox = initExchange($thisParadigm, $yearToday, '.', $sub, $proMoney, $subMoney, ratioCalc($proEconVal, $subEconVal), $proUseWeapon);
+    $proMoney = $msgBox['debit'];
+    $subMoney = $msgBox['credit'];
 } elseif ($subAction == "withdraw") {
-    echo initExchange($thisParadigm, $yearToday, $sub, '.', $subMoney, $proMoney, ratioCalc($subEconVal, $proEconVal), $subUseWeapon);
+    $msgBox = initExchange($thisParadigm, $yearToday, $sub, '.', $subMoney, $proMoney, ratioCalc($subEconVal, $proEconVal), $subUseWeapon);
+    $subMoney = $msgBox['debit'];
+    $proMoney = $msgBox['credit'];
 }
