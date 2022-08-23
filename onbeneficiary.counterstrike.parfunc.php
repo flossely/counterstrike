@@ -28,7 +28,12 @@ if ($subHandle != '') {
             $subZ = $msgBox['z'];
         }
     } elseif ($subAction == 'drop') {
-        $subHandle = '';
+        if (file_exists($subHandle)) {
+            $hanHalfNotation = useHalfNotation($subHandle);
+            $hanCoord = file_get_contents($subHandle.'/coord');
+            $subHandle = '';
+            echo $turnNum." : ".$subHalfNotation.' '.$spacedictus[$proLingo]['drop'].' '.$hanHalfNotation.' '.$spacedictus[$proLingo]['on'].' {'.$hanCoord."}<br>";
+        }
     } elseif ($subAction == 'steal') {
         if (file_exists($subHandle)) {
             $hanHalfNotation = useHalfNotation($subHandle);
@@ -57,5 +62,10 @@ if ($subHandle != '') {
         $subZ = $msgBox['z'];
     } elseif ($subAction == 'pickup') {
         $subHandle = $obj;
+        if (file_exists($subHandle)) {
+            $hanHalfNotation = useHalfNotation($subHandle);
+            $hanCoord = file_get_contents($subHandle.'/coord');
+            echo $turnNum." : ".$subHalfNotation.' '.$spacedictus[$proLingo]['pickup'].' '.$hanHalfNotation.' '.$spacedictus[$proLingo]['on'].' {'.$hanCoord."}<br>";
+        }
     }
 }
