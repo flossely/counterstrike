@@ -27,6 +27,44 @@ function parseGetData($data): array {
     return $arr;
 }
 
+function gitPerform($host = 'https://github.com', $repo, $branch, $user, $file, $dest, $name) {
+    if (file_exists($repo)) {
+        chmod($repo, 0777);
+        rename($repo, $repo.'.d');
+    }
+    if ($branch != '') {
+        exec('git clone -b '.$branch.' '.$host.'/'.$user.'/'.$repo);
+    } else {
+        exec('git clone '.$host.'/'.$user.'/'.$repo);
+    }
+    exec('chmod -R 777 .');
+    chmod($repo, 0777);
+    gitOperation($repo, $file, $dest, $name);
+    exec('chmod -R 777 .');
+    exec('rm -rf '.$repo);
+    if (file_exists($repo.'.d')) {
+        chmod($repo.'.d', 0777);
+        rename($repo.'.d', $repo);
+    }
+}
+
+function gitOperation($repo, $filename, $dest, $newname) {
+    if (file_exists('./'.$repo.'/'.$filename)) {
+        copy('./'.$repo.'/'.$filename, './'.$dest.'/'.$newname);
+        chmod('./'.$dest.'/'.$newname, 0777);
+    }
+}
+
+function verboseMode($m) {
+    if ($m > 0) {
+        return 'right';
+    } elseif ($m < 0) {
+        return 'left';
+    } else {
+        return 'center';
+    }
+}
+
 if (file_exists('paradigm')) {
     $paradigm = file_get_contents('paradigm');
 } else {
@@ -48,33 +86,12 @@ if (file_exists('locale')) {
 }
 $lingua = $locale;
 
-function verbMode($m) {
-    if ($m > 0) {
-        $result = 'right';
-    } elseif ($m < 0) {
-        $result = 'left';
-    } else {
-        $result = 'center';
-    }
-    
-    return $result;
-}
-
 $add = $_REQUEST['id'];
 $dataString = $_REQUEST['data'];
 
-$metadata = parseGetData($dataString);
-$team = $metadata['team'];
-
-if ($team == 'ct') {
-    $addMode = 1;
-    $addWeapon = 'ar15';
-} elseif ($team == 't') {
-    $addMode = -1;
-    $addWeapon = 'ak47';
-} else {
-    $addMode = 0;
-}
+$objMeta = parseGetData($dataString);
+$objMetaMode = $objMeta['mode'];
+$objMetaWeapon = $objMeta['weapon'];
 
 if (!file_exists($add)) {
     mkdir($add);
@@ -90,7 +107,7 @@ if (!file_exists($add.'/rating')) {
     chmod($add.'/rating', 0777);
 }
 if (!file_exists($add.'/mode')) {
-    file_put_contents($add.'/mode', $addMode);
+    file_put_contents($add.'/mode', $objMetaMode);
     chmod($add.'/mode', 0777);
 }
 if (!file_exists($add.'/score')) {
@@ -109,32 +126,7 @@ if (!file_exists($add.'/born')) {
 file_put_contents($add.'/locale', $lingua);
 chmod($add.'/locale', 0777);
 
-if ($addMode != 0) {
-    if (file_exists('weapons')) {
-        chmod('weapons', 0777);
-        rename('weapons', 'weapons.d');
-    }
-    exec('git clone -b counterstrike https://github.com/wholemarket/weapons');
-    chmod('weapons', 0777);
-    copy('./weapons/'.$addWeapon.'.weapon.obj', './'.$add.'/'.$addWeapon.'.weapon.obj');
-    exec('chmod -R 777 .');
-    exec('rm -rf weapons');
-    if (file_exists('weapons.d')) {
-        chmod('weapons.d', 0777);
-        rename('weapons.d', 'weapons');
-    }
+if ($objMetaMode != 0) {
+    gitPerform('https://github.com', 'weapons', $paradigm, 'wholemarket', $objMetaWeapon.'.weapon.obj', $add, $objMetaWeapon.'.weapon.obj');
 }
-
-if (file_exists('logos')) {
-    chmod('logos', 0777);
-    rename('logos', 'logos.d');
-}
-exec('git clone -b counterstrike https://github.com/wholemarket/logos');
-chmod('logos', 0777);
-copy('./logos/side.'.verbMode($addMode).'.png', './'.$add.'/favicon.png');
-exec('chmod -R 777 .');
-exec('rm -rf logos');
-if (file_exists('logos.d')) {
-    chmod('logos.d', 0777);
-    rename('logos.d', 'logos');
-}
+gitPerform('https://github.com', 'logos', $paradigm, 'wholemarket', 'side.'.verboseMode($objMetaMode).'.png', $add, 'favicon.png');
