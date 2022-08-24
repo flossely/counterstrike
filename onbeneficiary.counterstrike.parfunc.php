@@ -5,16 +5,16 @@ $subActionCount = count($subActions);
 $subAction = $subActions[rand(0, $subActionCount - 1)];
 
 if ($subAction == "walk") {
-    $msgBox = movement($turnNum, $subHalfNotation, $subX, $subY, $subZ, 3, $subMove);
+    $msgBox = movement($turnNum, $subFullName, $subX, $subY, $subZ, 3, $subMove);
     $subX = $msgBox['x'];
     $subY = $msgBox['y'];
     $subZ = $msgBox['z'];
 } elseif ($subAction == "heal") {
     $objRating += $subHeal;
     $subScore += 5;
-    echo $turnNum." : ".$subHalfNotation.' '.$spacedictus[$proLingo]["heal"].' ('.$subHeal.') '.$objHalfNotation."<br>";
+    echo $turnNum." : ".$subFullName.' '.$spacedictus[$proLingo]["heal"].' ('.$subHeal.') '.$objFullName."<br>";
 } elseif ($subAction == "escort") {
-    $msgBox = synchrone($turnNum, $subNotation, $subX, $subY, $subZ, $objNotation, $objX, $objY, $objZ, 3, $subMove);
+    $msgBox = synchrone($turnNum, $subFullName, $subX, $subY, $subZ, $objFullName, $objX, $objY, $objZ, 3, $subMove);
     $subX = $msgBox['i']['x'];
     $subY = $msgBox['i']['y'];
     $subZ = $msgBox['i']['z'];

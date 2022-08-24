@@ -5,7 +5,7 @@ $subActionCount = count($subActions);
 $subAction = $subActions[rand(0, $subActionCount - 1)];
 
 if ($subAction == "walk") {
-    $msgBox = movement($turnNum, $subHalfNotation, $subX, $subY, $subZ, 3, $subMove);
+    $msgBox = movement($turnNum, $subFullName, $subX, $subY, $subZ, 3, $subMove);
     $subX = $msgBox['x'];
     $subY = $msgBox['y'];
     $subZ = $msgBox['z'];
@@ -13,10 +13,10 @@ if ($subAction == "walk") {
     $objRating -= $subForce + $objShield;
     $subRating += $subForce - $objShield;
     $subScore += 10;
-    echo $turnNum." : ".$subHalfNotation.' '.$subForceType." (".$subForce."/".$objShield.") ".$objHalfNotation."<br>";
+    echo $turnNum." : ".$subFullName.' '.$subForceType." (".$subForce."/".$objShield.") ".$objFullName."<br>";
 } elseif ($subAction == "defend") {
     $subRating -= $objForce + $subShield;
     $objRating += $objForce - $subShield;
     $objScore += 5;
-    echo $turnNum." : ".$objHalfNotation.' '.$objForceType." (".$objForce."/".$subShield.") ".$subHalfNotation."<br>";
+    echo $turnNum." : ".$objFullName.' '.$objForceType." (".$objForce."/".$subShield.") ".$subFullName."<br>";
 }
