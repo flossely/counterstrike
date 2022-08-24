@@ -126,6 +126,11 @@ if (!file_exists($add.'/born')) {
 file_put_contents($add.'/locale', $lingua);
 chmod($add.'/locale', 0777);
 
+if (isset($objMeta['name'])) {
+    file_put_contents($add.'/name', $objMeta['name']);
+    chmod($add.'/name', 0777);
+}
+
 if ($objMetaMode != 0) {
     gitPerform('https://github.com', 'weapons', $paradigm, 'wholemarket', $objMetaWeapon.'.weapon.obj', $add, $objMetaWeapon.'.weapon.obj');
 }
