@@ -1,15 +1,6 @@
 <?php
 
-$subActions = [];
-if ($subUseWeapon !== null) {
-    $subActions[] = 'strike';
-    if ((isset($subUseWeapon['strafe_min'])) && (isset($subUseWeapon['strafe_max']))) {
-        $subActions[] = 'strafe';
-    }
-}
-if ($subUseMelee !== null) {
-    $subActions[] = 'melee';
-}
+$subActions = ['strike', 'melee'];
 $subActionCount = count($subActions);
 $subAction = $subActions[rand(0, $subActionCount - 1)];
 
@@ -37,21 +28,4 @@ if ($subAction == "strike") {
         $subScore += $subMeleeForce;
         echo $turnNum." : ".$subFullName.' '.$subMeleeType." (".$subMeleeForce.") ".$objFullName."<br>";
     }
-} elseif ($subAction == "strafe") {
-    $subShootCount = rand($subUseWeapon['strafe_min'], $subUseWeapon['strafe_max']);
-    $subShootSum = 0;
-    for ($i = 0; $i < $subShootCount; $i++) {
-        if ($objUseShield !== null) {
-            $objRating -= $subForce + $objShield;
-            $subRating += $subForce - $objShield;
-            $subScore += $subForce - $objShield;
-            $subShootSum += $subForce - $objShield;
-        } else {
-            $objRating -= $subForce;
-            $subRating += $subForce;
-            $subScore += $subForce;
-            $subShootSum += $subForce;
-        }
-    }
-    echo $turnNum." : ".$subFullName.' '.$subForceType." (".$subShootSum.") ".$objFullName."<br>";
 }
