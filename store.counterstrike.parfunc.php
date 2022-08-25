@@ -25,3 +25,55 @@ if ($objUseWeapon !== null) {
     $objForceType = 'melee';
     $objForce = 1;
 }
+
+$proUseMelee = shopFor('.', 'melee');
+$subUseMelee = shopFor($sub, 'melee');
+$objUseMelee = shopFor($obj, 'melee');
+
+if ($proUseMelee !== null) {
+    $proMeleeType = $proUseMelee['name'];
+    $proMeleeForce = $proUseMelee['damage'];
+} else {
+    $proMeleeType = 'melee';
+    $proMeleeForce = 1;
+}
+if ($subUseMelee !== null) {
+    $subMeleeType = $subUseMelee['name'];
+    $subMeleeForce = $subUseMelee['damage'];
+} else {
+    $subMeleeType = 'melee';
+    $subMeleeForce = 1;
+}
+if ($objUseMelee !== null) {
+    $objMeleeType = $objUseMelee['name'];
+    $objMeleeForce = $objUseMelee['damage'];
+} else {
+    $objMeleeType = 'melee';
+    $objMeleeForce = 1;
+}
+
+$proUseShield = shopFor('.', 'shield');
+$subUseShield = shopFor($sub, 'shield');
+$objUseShield = shopFor($obj, 'shield');
+
+if ($proUseShield !== null) {
+    $proShieldType = $proUseShield['name'];
+    $proShield = $proUseShield['defense'];
+} else {
+    $proShieldType = 'none';
+    $proShield = 0;
+}
+if ($subUseShield !== null) {
+    $subShieldType = $subUseShield['name'];
+    $subShield = $subUseShield['defense'];
+} else {
+    $subShieldType = 'none';
+    $subShield = 0;
+}
+if ($objUseShield !== null) {
+    $objShieldType = $objUseShield['name'];
+    $objShield = $objUseShield['defense'];
+} else {
+    $objShieldType = 'none';
+    $objShield = 0;
+}

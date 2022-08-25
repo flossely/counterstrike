@@ -1,22 +1,39 @@
 <?php
 
-$subActions = ["walk", "strike", "defend"];
+$subActions = ["strike"];
 $subActionCount = count($subActions);
 $subAction = $subActions[rand(0, $subActionCount - 1)];
 
-if ($subAction == "walk") {
-    $msgBox = movement($turnNum, $subFullName, $subX, $subY, $subZ, 3, $subMove);
-    $subX = $msgBox['x'];
-    $subY = $msgBox['y'];
-    $subZ = $msgBox['z'];
-} elseif ($subAction == "strike") {
-    $objRating -= $subForce + $objShield;
-    $subRating += $subForce - $objShield;
-    $subScore += 10;
+if (isset($subUseWeapon['strafe_min']) && isset($subUseWeapon['strafe_max'])) {
+    $subActions[] = "strafe";
+}
+
+if ($subAction == "strike") {
+    if ($objUseShield !== null) {
+        $objRating -= $subForce + $objShield;
+        $subRating += $subForce - $objShield;
+        $subScore += $subForce - $objShield;
+    } else {
+        $objRating -= $subForce;
+        $subRating += $subForce;
+        $subScore += $subForce;
+    }
     echo $turnNum." : ".$subFullName.' '.$subForceType." (".$subForce."/".$objShield.") ".$objFullName."<br>";
-} elseif ($subAction == "defend") {
-    $subRating -= $objForce + $subShield;
-    $objRating += $objForce - $subShield;
-    $objScore += 5;
-    echo $turnNum." : ".$objFullName.' '.$objForceType." (".$objForce."/".$subShield.") ".$subFullName."<br>";
+} elseif ($subAction == "strafe") {
+    $subShootCount = rand($subUseWeapon['strafe_min'], $subUseWeapon['strafe_max']);
+    $subShootSum = 0;
+    for ($i = 0; $i < $subShootCount; $i++) {
+        if ($objUseShield !== null) {
+            $objRating -= $subForce + $objShield;
+            $subRating += $subForce - $objShield;
+            $subScore += $subForce - $objShield;
+            $subShootSum += $subForce - $objShield;
+        } else {
+            $objRating -= $subForce;
+            $subRating += $subForce;
+            $subScore += $subForce;
+            $subShootSum += $subForce;
+        }
+    }
+    echo $turnNum." : ".$subFullName.' '.$subForceType." (".$subShootSum.") ".$objFullName."<br>";
 }

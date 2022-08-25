@@ -104,8 +104,11 @@ $add = $_REQUEST['id'];
 $dataString = $_REQUEST['data'];
 
 $objMeta = parseGetData($dataString);
-$objMetaMode = $objMeta['mode'];
-$objMetaWeapon = $objMeta['weapon'];
+if (isset($objMeta['mode'])) {
+    $objMetaMode = $objMeta['mode'];
+} else {
+    $objMetaMode = 0;
+}
 
 if (!file_exists($add)) {
     mkdir($add);
@@ -145,7 +148,13 @@ if (isset($objMeta['name'])) {
     chmod($add.'/name', 0777);
 }
 
-if ($objMetaMode != 0) {
-    gitPerform('https://github.com', 'weapons', $paradigm, 'wholemarket', $objMetaWeapon.'.weapon.obj', $add, $objMetaWeapon.'.weapon.obj');
-}
 gitPerform('https://github.com', 'logos', $paradigm, 'wholemarket', 'side.'.verboseMode($objMetaMode).'.png', $add, 'favicon.png');
+if (isset($objMeta['weapon'])) {
+    gitPerform('https://github.com', 'equipment', $paradigm, 'wholemarket', $objMeta['weapon'].'.weapon.obj', $add, $objMeta['weapon'].'.weapon.obj');
+}
+if (isset($objMeta['melee'])) {
+    gitPerform('https://github.com', 'equipment', $paradigm, 'wholemarket', $objMeta['melee'].'.melee.obj', $add, $objMeta['melee'].'.melee.obj');
+}
+if (isset($objMeta['shield'])) {
+    gitPerform('https://github.com', 'equipment', $paradigm, 'wholemarket', $objMeta['shield'].'.shield.obj', $add, $objMeta['shield'].'.shield.obj');
+}
