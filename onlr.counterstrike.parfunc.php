@@ -1,8 +1,14 @@
 <?php
 
-$subActions = ['strike', 'melee'];
-if ((isset($subUseWeapon['strafe_min'])) && (isset($subUseWeapon['strafe_max']))) {
-    $subActions[] = 'strafe';
+$subActions = [];
+if ($subUseWeapon !== null) {
+    $subActions[] = 'strike';
+    if ((isset($subUseWeapon['strafe_min'])) && (isset($subUseWeapon['strafe_max']))) {
+        $subActions[] = 'strafe';
+    }
+}
+if ($subUseMelee !== null) {
+    $subActions[] = 'melee';
 }
 $subActionCount = count($subActions);
 $subAction = $subActions[rand(0, $subActionCount - 1)];
