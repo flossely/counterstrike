@@ -18,23 +18,25 @@ if ($subAction == "strike") {
         $objRating -= $subForce + $objShield;
         $subRating += $subForce - $objShield;
         $subScore += $subForce - $objShield;
+        echo $turnNum." : ".$subFullName.' '.$subForceType." (".$subForce."/".$objShield.") ".$objFullName."<br>";
     } else {
         $objRating -= $subForce;
         $subRating += $subForce;
         $subScore += $subForce;
+        echo $turnNum." : ".$subFullName.' '.$subForceType." (".$subForce.") ".$objFullName."<br>";
     }
-    echo $turnNum." : ".$subFullName.' '.$subForceType." (".$subForce."/".$objShield.") ".$objFullName."<br>";
 } elseif ($subAction == "melee") {
     if ($objUseShield !== null) {
         $objRating -= $subMeleeForce + $objShield;
         $subRating += $subMeleeForce - $objShield;
         $subScore += $subMeleeForce - $objShield;
+        echo $turnNum." : ".$subFullName.' '.$subMeleeType." (".$subMeleeForce."/".$objShield.") ".$objFullName."<br>";
     } else {
         $objRating -= $subMeleeForce;
         $subRating += $subMeleeForce;
         $subScore += $subMeleeForce;
+        echo $turnNum." : ".$subFullName.' '.$subMeleeType." (".$subMeleeForce.") ".$objFullName."<br>";
     }
-    echo $turnNum." : ".$subFullName.' '.$subMeleeType." (".$subMeleeForce."/".$objShield.") ".$objFullName."<br>";
 } elseif ($subAction == "strafe") {
     $subShootCount = rand($subUseWeapon['strafe_min'], $subUseWeapon['strafe_max']);
     $subShootSum = 0;
@@ -52,6 +54,4 @@ if ($subAction == "strike") {
         }
     }
     echo $turnNum." : ".$subFullName.' '.$subForceType." (".$subShootSum.") ".$objFullName."<br>";
-} else {
-    echo $turnNum." : ".$subFullName.' '.$spacedictus[$proLingo]["pass"]."<br>";
 }
