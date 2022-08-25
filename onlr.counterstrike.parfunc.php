@@ -1,12 +1,11 @@
 <?php
 
 $subActions = ['strike', 'melee'];
-$subActionCount = count($subActions);
-$subAction = $subActions[rand(0, $subActionCount - 1)];
-
-if (isset($subUseWeapon['strafe_min']) && isset($subUseWeapon['strafe_max'])) {
+if ((isset($subUseWeapon['strafe_min'])) && (isset($subUseWeapon['strafe_max']))) {
     $subActions[] = 'strafe';
 }
+$subActionCount = count($subActions);
+$subAction = $subActions[rand(0, $subActionCount - 1)];
 
 if ($subAction == "strike") {
     if ($objUseShield !== null) {
