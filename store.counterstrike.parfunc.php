@@ -34,21 +34,21 @@ if ($proUseMelee !== null) {
     $proMeleeType = $proUseMelee['name'];
     $proMeleeForce = $proUseMelee['damage'];
 } else {
-    $proMeleeType = 'melee';
+    $proMeleeType = 'hit';
     $proMeleeForce = 1;
 }
 if ($subUseMelee !== null) {
     $subMeleeType = $subUseMelee['name'];
     $subMeleeForce = $subUseMelee['damage'];
 } else {
-    $subMeleeType = 'melee';
+    $subMeleeType = 'hit';
     $subMeleeForce = 1;
 }
 if ($objUseMelee !== null) {
     $objMeleeType = $objUseMelee['name'];
     $objMeleeForce = $objUseMelee['damage'];
 } else {
-    $objMeleeType = 'melee';
+    $objMeleeType = 'hit';
     $objMeleeForce = 1;
 }
 
