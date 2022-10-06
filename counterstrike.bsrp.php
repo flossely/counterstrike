@@ -90,16 +90,6 @@ function gitOperation($repo, $filename, $dest, $newname) {
     }
 }
 
-function verboseMode($m) {
-    if ($m > 0) {
-        return 'right';
-    } elseif ($m < 0) {
-        return 'left';
-    } else {
-        return 'center';
-    }
-}
-
 if (file_exists('paradigm')) {
     $paradigm = file_get_contents('paradigm');
 } else {
