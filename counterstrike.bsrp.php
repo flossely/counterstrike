@@ -165,13 +165,12 @@ if (isset($meta['name'])) {
     chmod($add.'/name', 0777);
 }
 
-gitPerform('https://github.com', 'logos', $paradigm, 'wholemarket', 'side.'.verboseMode($mode).'.png', $add, 'favicon.png');
 if (isset($meta['weapon'])) {
-    gitPerform('https://github.com', 'equipment', $paradigm, 'wholemarket', $meta['weapon'].'.weapon.obj', $add, $meta['weapon'].'.weapon.obj');
+    gitPerform('https://github.com', 'thingy', 'weapon', 'wholemarket', $meta['weapon'].'.weapon.obj', $add, $meta['weapon'].'.weapon.obj');
 }
 if (isset($meta['melee'])) {
-    gitPerform('https://github.com', 'equipment', $paradigm, 'wholemarket', $meta['melee'].'.melee.obj', $add, $meta['melee'].'.melee.obj');
+    gitPerform('https://github.com', 'thingy', 'weapon', 'wholemarket', $meta['melee'].'.melee.obj', $add, $meta['melee'].'.melee.obj');
 }
 if (isset($meta['shield'])) {
-    gitPerform('https://github.com', 'equipment', $paradigm, 'wholemarket', $meta['shield'].'.shield.obj', $add, $meta['shield'].'.shield.obj');
+    gitPerform('https://github.com', 'thingy', 'weapon', 'wholemarket', $meta['shield'].'.shield.obj', $add, $meta['shield'].'.shield.obj');
 }
